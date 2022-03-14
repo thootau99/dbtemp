@@ -4,3 +4,10 @@ services:
   api:
     restart: always
     build: .
+    env_file:
+      - .env
+      - .env.mysql
+    volumes:
+      - ./:/usr/app/src
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"

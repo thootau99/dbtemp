@@ -91,9 +91,8 @@ RUN apk add --no-cache --virtual .build-deps-yarn curl gnupg tar \
   && rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz \
   && apk del .build-deps-yarn \
   # smoke test
-  && yarn --version
+  && yarn --version \
+  && npm install nodemon -g
 
-COPY docker-entrypoint.sh /usr/local/bin/
-ENTRYPOINT ["docker-entrypoint.sh"]
-
-CMD [ "node" ]
+WORKDIR /usr/app/src
+CMD [ "npm", "run", "dev" ]
